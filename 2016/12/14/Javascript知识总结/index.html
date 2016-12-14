@@ -13,11 +13,11 @@
 
     <title>
         
-          js相关知识总结 - Zhouqin的博客 | Zhouqin&#39;s Blog
+          Zhouqin的博客 | Zhouqin&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zq381368330.github.io/2016/12/13/js相关知识总结/">
+    <link rel="canonical" href="https://zq381368330.github.io/2016/12/14/Javascript知识总结/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -163,11 +163,11 @@
                     <div class="tags">
                         
                     </div>
-                    <h1>js相关知识总结</h1>
+                    <h1></h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Kaijun Chen on
-                        2016-12-13
+                        2016-12-14
                     </span>
                 </div>
             </div>
@@ -186,7 +186,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h1 id="《Javascript高级程序设计读书笔记》"><a href="#《Javascript高级程序设计读书笔记》" class="headerlink" title="《Javascript高级程序设计读书笔记》"></a>《Javascript高级程序设计读书笔记》</h1><p>####导语：</p>
+<blockquote>
+<p>Js高级程序设计读书笔记</p>
+<p>###一，变量的作用域</p>
+</blockquote>
+<p>####引出问题：</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/1.png" alt="作用域"></p>
+<p>你可能会认为第一次弹出的是123(也就是全局变量a的值)，而实际上第一次弹出的是”undefined”,这是因为函数域始终优先于全局域，所以局部变量a会覆盖掉与它同名的全局变量。</p>
+<p>###二、函数</p>
+<p>####1、什么是回调函数？(函数可以当做参数传递给其他函数)</p>
+<p>####引出问题：<br>看下面两个函数：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/2.png" alt="png2"></p>
+<p><strong>测试结果如下：</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/3.png" alt="3"></p>
+<p>接下来，实现三个元素在两个函数之间的传递，这需要定义一个存储元素的数组：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/7.png" alt="7"></p>
+<p><strong>这时我们只需要做以下改动，只需要函数一次调用就可以了。</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/4.png" alt="5"></p>
+
 
                 <hr>
 
@@ -194,13 +210,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/14/Javascript知识总结/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/13/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                            <a href="/2016/12/13/js相关知识总结/" data-toggle="tooltip" data-placement="top" title="js相关知识总结">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -271,8 +283,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://zq381368330.github.io/2016/12/13/js相关知识总结/";
-    var disqus_url = "https://zq381368330.github.io/2016/12/13/js相关知识总结/";
+    var disqus_identifier = "https://zq381368330.github.io/2016/12/14/Javascript知识总结/";
+    var disqus_url = "https://zq381368330.github.io/2016/12/14/Javascript知识总结/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
