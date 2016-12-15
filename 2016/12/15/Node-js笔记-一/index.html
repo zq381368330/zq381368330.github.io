@@ -13,11 +13,11 @@
 
     <title>
         
-          Hello World - Zhouqin的博客 | Zhouqin&#39;s Blog
+          Node.js笔记(一) - Zhouqin的博客 | Zhouqin&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zq381368330.github.io/2016/12/13/hello-world/">
+    <link rel="canonical" href="https://zq381368330.github.io/2016/12/15/Node-js笔记-一/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -87,14 +87,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -163,11 +163,11 @@
                     <div class="tags">
                         
                     </div>
-                    <h1>Hello World</h1>
+                    <h1>Node.js笔记(一)</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Kaijun Chen on
-                        2016-12-13
+                        2016-12-15
                     </span>
                 </div>
             </div>
@@ -186,15 +186,59 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+                <p>#Nodejs基础(一)</p>
+<blockquote>
+<p>导语：根据慕课网scott老师的视频整理的学习笔记</p>
+<p>##什么是Node.js<br>简单的说 Node.js 就是运行在服务端的 JavaScript。<br>Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。<br>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好</p>
+<p>##创建第一个Node.js应用<br>Node.js 应用是由哪几部分组成的：<br>引入 required 模块：我们可以使用 require 指令来载入 Node.js 模块。<br>创建服务器：服务器可以监听客户端的请求，类似于 Apache 、Nginx 等 HTTP 服务器。<br>接收请求与响应请求 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP 请求，服务器接收请求后返回响应数据。</p>
+<p>###一、创建服务器<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/node1.png" alt="node1"></p>
+</blockquote>
+<p>###二、模块的流程<br>模块化：给每个对象新建一个单独的js，在里面对该对象属性方法进行定义，通过exports将该对象内部的方法属性暴露出来，使得其他对象能够访问，但是在访问之前必须在自身js中通过require引入该模块。</p>
+<p><strong>1、创建模块</strong></p>
+<p>teacher.js</p>
+<p><strong>2.导出模块</strong></p>
+<p>Exports.add=function(){}</p>
+<p><strong>3.加载模块</strong></p>
+<p>Var teacher=require(‘./teacher.js’)</p>
+<p><strong>4.使用模块</strong></p>
+<p>Teacher.add(‘Scott’)</p>
+<p>下面来看一个例子:</p>
+<p>1.首先建两个文件teacher.js和student.js</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a2.png" alt="a2"></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a3.png" alt="a3"></p>
+<p>2.既然学生老师都有了，就差一个班级了，<br>然后建立一个klass.js。先用require引用学生、老师模块，然后把这个模块对象赋值给局部变量student和teacher</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a5.png" alt="a5"></p>
+<p>exports.add = add;和 module.exports = add 不同点注意<br>exports.add传统的模块实例，<br>module.exports特别的对象类型，支持存在的东西。</p>
+<p>3.最后建一个index.js<br>首先导入班级，然后调用班级add方法，传入一个数组klasses，数组里是一个个对象，一个对象里有老师的名字和学生的数组<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a4.png" alt="a4"></p>
+<p>##Node.js API</p>
+<p>###一、URL</p>
+<p><strong>1、url.format(urlObject)</strong></p>
+<p>Url将一个url对象格式化一个字符串</p>
+<p>url.parse(urlString[, parseQueryString[, slashesDenoteHost]])</p>
+<p>解析一个url地址</p>
+<p>url.resolve(from, to)</p>
+<p>首先进入node命令行环境，输入url如图下所示：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a6.png" alt="a6"><br>再输入我们可以得到</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a7.png" alt="a7"></p>
+<p>Protpcol：底层使用的协议<br>Slashes：<br>Hostname：主机名<br>Search：查询字符串参数</p>
+<p><strong>2.parse用法:将一个URL字符串转换成对象并返回</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/8.png" alt="8"></p>
+<p><strong>3.Format用法:将一个解析后的URL对象、转成、一个格式化的URL字符串</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/9.png" alt="9"></p>
+<p>生成了一个完整的url地址：</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/10.png" alt="10"></p>
+<p><strong>4.Resolve用法：为URL或 href 插入 或 替换原有的标签</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/11.png" alt="11"></p>
+<p><strong>5.Parse用法：（加true）</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/12.png" alt="12"><br><strong>Query为一个字符串</strong></p>
+<p><strong>6.Parse用法：（不加true）</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/13.png" alt="13"></p>
+<p>###二、queryString<br><strong>1.怎么把一个参数对象序列化成一个参数字符串（序列化）</strong><br>第一个参数：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/14.png" alt="14"></p>
+<p>第二个参数:<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/15.png" alt="15"></p>
+<p>第三个参数：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/16.png" alt="16"></p>
+<p><strong>22反序列化</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/a17.png" alt="17"></p>
+<p>如果有，分割，那么第二个参数传入，</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/18.png" alt="18"></p>
+<p>如果有冒号的，第三个参数传入冒号：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/19.png" alt="19"></p>
+<p>###三、转义</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/20.png" alt=""></p>
 
 
                 <hr>
@@ -203,10 +247,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/13/js相关知识总结/" data-toggle="tooltip" data-placement="top" title="js相关知识总结">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2016/12/14/Javascript知识总结/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -276,8 +320,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://zq381368330.github.io/2016/12/13/hello-world/";
-    var disqus_url = "https://zq381368330.github.io/2016/12/13/hello-world/";
+    var disqus_identifier = "https://zq381368330.github.io/2016/12/15/Node-js笔记-一/";
+    var disqus_url = "https://zq381368330.github.io/2016/12/15/Node-js笔记-一/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
