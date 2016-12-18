@@ -13,11 +13,11 @@
 
     <title>
         
-          Zhouqin的博客 | Zhouqin&#39;s Blog
+          Javascript之原型 - Zhouqin的博客 | Zhouqin&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zq381368330.github.io/i_dont_wanna_use_default_archives/">
+    <link rel="canonical" href="https://zq381368330.github.io/2016/12/18/Javascript之原型/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,7 +144,235 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://zq381368330.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Javascript之原型</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Kaijun Chen on
+                        2016-12-18
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>#Javascript之原型(一)</p>
+<blockquote>
+<p>Prototype本质上是一个Javascript对象，并且每一个函数都有一个默认的Prototype属性</p>
+</blockquote>
+<p>###构造函数<br>function Person(name)</p>
+<p> {</p>
+<p>this.name = name;</p>
+<p>}</p>
+<p>###定义Person的原型,原型中的属性可以被自定义对象引用<br>Person.prototype = {</p>
+<pre><code>getName: function() {
+
+    return this.name;
+
+}
+</code></pre><p>}</p>
+<p>var hao = new Person(“hello”);</p>
+<p>console.log(hao.getName());<br> //“hello”</p>
+<p>###下面开始学习原型：</p>
+<p>####1、通过原型添加属性的两种方法：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y1.png" alt=""></p>
+<p>####2、理解原型‘驻留’的概念<br>  由于在Javascript中，对象都是通过传引用的方式来传递的，因此我们所创建的每个新对象实体中并没有一份属于自己的原型副本。知道这意味着什么吗？这就是说，我们可以随时修改原型，并且与之相关的对象也都会继承这一改变，继续之前的例子，我们再向原型中添加一个新方法：<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y2.png" alt="">;</p>
+<p>然后我们就会看到，即使newtoy对象在get()方法定义之前就已经被创建了，但我们依然可以在该对象中访问新增的方法<br>在控制台输入:</p>
+<p>newtoy.get(‘price’);</p>
+<p>打印：</p>
+<p><strong>100</strong></p>
+<p>####3.理解constructor<br>Constructor始终指向创建当前对象的构造函数</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y3.png" alt="y3.png"></p>
+<p>但是当Constructor遇到prototype时，</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y4.png" alt="y4.png"></p>
+<p>我们重新定义函数的prototype时，这里不是修改是覆盖,出现了以下问题</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y5.png" alt="y5"></p>
+<p><strong>原因是因为覆盖了prototype，相当于执行了以下操作（相当于重写了prototype）</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y6.png" alt="y6"></p>
+<p>而constructor始终指向创建自身的构造函数，所以此时Person.prototype.constructor===Object</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y7.png" alt="y7"></p>
+<p>如何修正这种问题呢？方法很简单，重新覆盖Person.prototype.constructor就行了</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y8.png" alt="y8"></p>
+<p>也可以这么写</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y9.png" alt="y9"></p>
+<p>####4.理解原型对象</p>
+<p>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象，在默认情况下，所有原型对象都会自动获得一个constructor(构造函数)属性，这个属性包含一个指向prototype属性所在的函数的指针。</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y10.png" alt="y10"></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y11.png" alt="y11"></p>
+<p>####5.原型对象的问题<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y12.png" alt="y12"></p>
+<p>由上例可知，修改person1.friends,影响到了person2.friends</p>
+<p>解决方法：<br>组合使用构造函数模式和原型模式</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y14.png" alt="y14"></p>
+<p>####6.另外几种模式</p>
+<p><strong>1、动态原型模式</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y15.png" alt="y15"></p>
+<p>如果去掉if的话，你每new一次(即每当一个实例对象生产时)，都会重新定义一个新的函数，然后挂到Person.prototype.sayName属性上。而实际上，你只需要定义一次就够了，因为所有实例都会共享此属性的。所以如果去掉if的话，会造成没必要的时间和空间浪费；而加上if后，只在new第一个实例时才会定义sayName方法，之后就不会了。</p>
+<p><strong>2、寄生构造函数模式</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y16.png" alt="y16"></p>
+<p>除了使用new操作符并把使用的的包装函数叫做构造函数之外，这个模式跟工厂模式其实是一模一样的。构造函数在不返回值的情况下。默认会返回新对象实例。而通过在构造函数的末尾添加一个return语句，可以重写调用构造函数时返回的值。</p>
+<p>这个模式可以在特殊情况下用来为对象创建构造函数。假设我们想创建一个具有额外方法的特殊数组。由于不能直接修改Array构造函数，因此可以使用这个模式。</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y17.png" alt="y17"></p>
+<p><strong>3.稳妥构造函数模式</strong></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y19.png" alt="y19"><br>以这种模式创建的对象中，除了使用sayName()方法之外，没有其他办法访问name的值。即使有其他代码会给这个对象添加方法或数据成员，但也不可能有别的方法访问传入到构造函数中的原始数据。稳妥构造函数模式提供的这种安全性，使得它非常适合在某些安全执行环境提供的环境下使用。</p>
+<p>未完待续。。。。。。。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/18/Javascript之this关键字/" data-toggle="tooltip" data-placement="top" title="Javascript之this关键字">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://zq381368330.github.io/2016/12/18/Javascript之原型/";
+    var disqus_url = "https://zq381368330.github.io/2016/12/18/Javascript之原型/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
