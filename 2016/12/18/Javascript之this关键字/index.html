@@ -13,11 +13,11 @@
 
     <title>
         
-          js相关知识总结 - Zhouqin的博客 | Zhouqin&#39;s Blog
+          Javascript之this关键字 - Zhouqin的博客 | Zhouqin&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zq381368330.github.io/2016/12/13/js相关知识总结/">
+    <link rel="canonical" href="https://zq381368330.github.io/2016/12/18/Javascript之this关键字/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -163,11 +163,11 @@
                     <div class="tags">
                         
                     </div>
-                    <h1>js相关知识总结</h1>
+                    <h1>Javascript之this关键字</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Kaijun Chen on
-                        2016-12-13
+                        2016-12-18
                     </span>
                 </div>
             </div>
@@ -186,7 +186,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <p>#关键字This<br>作用域指的是变量的作用范围，包括全局变量和局部变量，而上下文知道是this指向的对象；</p>
+<p>1.作为对象的方法<br>this在方法内部，this就指向调用这个方法的对象</p>
+<p>2.函数的调用<br>this指向执行环境中的全局对象（浏览器-&gt;window  nodejs-&gt;global）</p>
+<p>3.构造函数<br>this所在的方法被实例对象所调用，那么this就指向这个实例对象<br>更改上下文方法(更改this指向的内容,可方便地实现继承)：<br>全局函数apply和call可以用来改变函数中this的指向</p>
+<p><strong>例子1：</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j1.png" alt=""></p>
+<p><strong>例子2:</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j2.png" alt=""></p>
+<p><strong>例子3:</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j3.png" alt=""></p>
+<p>例子4:<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j4.png" alt=""></p>
+
 
                 <hr>
 
@@ -194,10 +202,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/14/Javascript知识总结/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2016/12/15/Node-js笔记-一/" data-toggle="tooltip" data-placement="top" title="Node.js笔记(一)">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -267,8 +275,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://zq381368330.github.io/2016/12/13/js相关知识总结/";
-    var disqus_url = "https://zq381368330.github.io/2016/12/13/js相关知识总结/";
+    var disqus_identifier = "https://zq381368330.github.io/2016/12/18/Javascript之this关键字/";
+    var disqus_url = "https://zq381368330.github.io/2016/12/18/Javascript之this关键字/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
