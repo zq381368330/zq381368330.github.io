@@ -13,11 +13,11 @@
 
     <title>
         
-          Javascript之this关键字 - Zhouqin的博客 | Zhouqin&#39;s Blog
+          Javascript之原型(二) - Zhouqin的博客 | Zhouqin&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zq381368330.github.io/2016/12/18/Javascript之this关键字/">
+    <link rel="canonical" href="https://zq381368330.github.io/2016/12/18/Javascript之原型-二/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -163,7 +163,7 @@
                     <div class="tags">
                         
                     </div>
-                    <h1>Javascript之this关键字</h1>
+                    <h1>Javascript之原型(二)</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Kaijun Chen on
@@ -186,14 +186,30 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>#关键字This<br>作用域指的是变量的作用范围，包括全局变量和局部变量，而上下文知道是this指向的对象；</p>
-<p>1.作为对象的方法<br>this在方法内部，this就指向调用这个方法的对象</p>
-<p>2.函数的调用<br>this指向执行环境中的全局对象（浏览器-&gt;window  nodejs-&gt;global）</p>
-<p>3.构造函数<br>this所在的方法被实例对象所调用，那么this就指向这个实例对象<br>更改上下文方法(更改this指向的内容,可方便地实现继承)：<br>全局函数apply和call可以用来改变函数中this的指向</p>
-<p><strong>例子1：</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j1.png" alt=""></p>
-<p><strong>例子2:</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j2.png" alt=""></p>
-<p><strong>例子3:</strong><br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j3.png" alt=""></p>
-<p>例子4:<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/j4.png" alt=""></p>
+                <p>#Javascript之原型(二)<br>许多oo语言都支持两种继承方式:接口继承和实现继承。接口继承只继承方法签名，而实现继承则继承实际的方法。如前所示，由于函数没有签名，在ECMAScript中无法实现接口继承。而ECMAScript中只支持实现继承,而且实现继承主要是依靠原型链来实现的。</p>
+<p>###原型链<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y201.png" alt=""></p>
+<p>以上定义了两个类型:SuperType和SubType。每个类型分别有一个属性和方法。<br>SubType继承了SuperType，而继承是通过创建SuperType的实例，并将该实例赋给SubTyoe.prototype实现的。实现的本质是重写原型对象，代之以一个新类型的实例。换句话说，原来存在于SuperType的实例中的所有属性和方法，现在也存在于SubType.prototype中了。<br>   我们给SubType.prototype添加了一个方法，这样就在继承了SuperType的属性的和方法的基础上又添加了一个新方法。<br>这个例子的实例以及构造函数和原型之间的关系如图所示<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y202.png" alt=""><br>在上面的代码中，我们没有使用SubType默认提供的原型，而是给它换了一个新原型；这个新原型就是SuperType的实例。于是新原型内部有一个指针，指向了SuperType的原型。</p>
+<p>最终结果是这样的：instance指向SubType的原型，而SubType的原型又指向SuperType的原型。getSuperValue()方法仍然还在SuperType.prototype中，但property则位于SubType.prototype中。只是因为property是一个实例属性，而getSuperValue()则是一个原型方法。<br>要注意instance.constructor现在指向的是SuperType，这是因为原来的SubType.prototype中的constructor被重写了的 缘故。</p>
+<p>###确定原型和实例的关系<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y203.png" alt=""></p>
+<p>###给原型添加方法一定要放到替换原型的语句之后</p>
+<p>####1<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y204.png" alt=""></p>
+<p>####2不能通过对象字面量创建原型方法</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y205.png" alt="">;</p>
+<p>###原型链的问题</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y206.png" alt="y3.png"></p>
+<p>上面这个例子通过SuperType构造函数定义了一个colors属性。SubType的所有实例都会共享这一个colors属性。<br>原型链第二个问题是，在创建子类型的实例时，不能向超类型的构造函数传递参数。</p>
+<p>###借用构造函数<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y207.png" alt="y4.png"></p>
+<p>###传递参数</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y207.png" alt="y5"></p>
+<p>###组合继承<br>  组合继承，指的是将原型链和借用构造函数的技术组合到一块，从而发挥二者之长的模式。原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。这样，即通过原型定义方法实现了函数复用，又能保证每个实例都有自己的属性。</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y209.png" alt="y6"></p>
+<p>###原型式继承</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y210.png" alt="y7"></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y212.png" alt="y8"></p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y211.png" alt="y9"></p>
+<p>###寄生式继承<br>寄生式继承是与原型式继承紧密相关的一种思路。寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再真像真的是它<br>做了所有工作一样的返回对象。</p>
+<p><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y213.png" alt="y10"></p>
+<p>###寄生组合式继承<br><img src="https://raw.githubusercontent.com/zq381368330/MarkdownPhotos/master/y214.png" alt="y12"></p>
 
 
                 <hr>
@@ -202,13 +218,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/18/Javascript之原型/" data-toggle="tooltip" data-placement="top" title="Javascript之原型">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/15/Node-js笔记-一/" data-toggle="tooltip" data-placement="top" title="Node.js笔记(一)">Next Post &rarr;</a>
+                            <a href="/2016/12/18/Javascript之原型/" data-toggle="tooltip" data-placement="top" title="Javascript之原型">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -279,8 +291,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://zq381368330.github.io/2016/12/18/Javascript之this关键字/";
-    var disqus_url = "https://zq381368330.github.io/2016/12/18/Javascript之this关键字/";
+    var disqus_identifier = "https://zq381368330.github.io/2016/12/18/Javascript之原型-二/";
+    var disqus_url = "https://zq381368330.github.io/2016/12/18/Javascript之原型-二/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
